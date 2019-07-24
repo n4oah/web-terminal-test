@@ -4,11 +4,14 @@ const HTMLWebpackPlugin = require('html-Webpack-plugin')
 
 module.exports = {
     entry: {
-        main: ['./src/main.js']
+        main: ['./src/main.ts']
     },
     output: {
         filename: '[name].[chunkhash].js',
         path: path.resolve(__dirname, 'dist')
+    },
+    resolve: {
+        extensions: [ '.tsx', '.ts', '.js' ]
     },
     module: {
         rules: [
@@ -18,7 +21,11 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'
                 },
-            }
+            },
+            {
+				test: /\.tsx$/,
+				use: ['ts-loader']
+			}
         ]
     },
     plugins: [
